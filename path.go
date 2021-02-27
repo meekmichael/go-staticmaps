@@ -113,7 +113,7 @@ func (p *Path) Draw(gc *gg.Context, trans *Transformer) {
 	for _, ll := range p.Positions {
 		gc.LineTo(trans.LatLngToXY(ll))
 	}
-	gc.SetColor(p.Color)
-	gc.SetFillStyle(p.Pattern)
+	//gc.SetColor(p.Color)
+	gc.SetStrokeStyle(p.Pattern)
 	gc.Stroke()
 }
