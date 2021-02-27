@@ -21,6 +21,7 @@ type Path struct {
 	MapObject
 	Positions []s2.LatLng
 	Color     color.Color
+	Pattern   gg.Pattern
 	Weight    float64
 }
 
@@ -30,6 +31,7 @@ func NewPath(positions []s2.LatLng, col color.Color, weight float64) *Path {
 	p.Positions = positions
 	p.Color = col
 	p.Weight = weight
+	p.Pattern = gg.NewSolidPattern(col)
 
 	return p
 }
@@ -112,5 +114,6 @@ func (p *Path) Draw(gc *gg.Context, trans *Transformer) {
 		gc.LineTo(trans.LatLngToXY(ll))
 	}
 	gc.SetColor(p.Color)
+	gc.SetFillStyle(p.Pattern)
 	gc.Stroke()
 }
