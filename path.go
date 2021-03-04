@@ -31,7 +31,7 @@ func NewPath(positions []s2.LatLng, col color.Color, weight float64) *Path {
 	p.Positions = positions
 	p.Color = col
 	p.Weight = weight
-	p.Pattern = gg.NewSolidPattern(col)
+	p.Pattern = nil
 
 	return p
 }
@@ -113,7 +113,9 @@ func (p *Path) Draw(gc *gg.Context, trans *Transformer) {
 	for _, ll := range p.Positions {
 		gc.LineTo(trans.LatLngToXY(ll))
 	}
-	//gc.SetColor(p.Color)
-	gc.SetStrokeStyle(p.Pattern)
+	gc.SetColor(p.Color)
+	if p.Pattern != nil {
+		gc.SetStrokeStyle(p.Pattern)
+	}
 	gc.Stroke()
 }
